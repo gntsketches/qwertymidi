@@ -80,7 +80,7 @@ class App extends React.Component {
 		})
 		console.log("quantizedTune", quantizedTune)
 
-		//
+		// perhaps a function to convert end beats to be at least one beat later...
 
 		const buildScribblePattern = (played, count) => {
 			let pattern = ''
