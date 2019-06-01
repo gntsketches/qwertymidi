@@ -2,7 +2,7 @@ import React from 'react'
 
 import StartStop from './StartStop'
 import ChangeBpm from './ChangeBpm'
-import ChangeQuantType from './ChangeQuantType'
+import ChangeQuantType from './ChangeQuantization'
 
 import './header.scss'
 

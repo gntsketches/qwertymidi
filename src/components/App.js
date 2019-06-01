@@ -82,7 +82,7 @@ class App extends React.Component {
 
 		//
 
-		function buildScribblePattern(played, count) {
+		const buildScribblePattern = (played, count) => {
 			let pattern = ''
 			if (played) {
 				pattern = 'x'
@@ -100,7 +100,6 @@ class App extends React.Component {
 
 		let midiTune = []
 		quantizedTune.forEach((noteObj, index) => {
-
 			let pattern = buildScribblePattern(true, noteObj.endBeat - noteObj.startBeat)
 			if (quantizedTune[index+1] && quantizedTune[index+1].startBeat - noteObj.endBeat > 0) {
 				pattern += buildScribblePattern(false, quantizedTune[index+1].startBeat - noteObj.endBeat)
@@ -108,7 +107,8 @@ class App extends React.Component {
 
 			const clip = scribble.clip({
 				notes: noteObj.note,
-				pattern: pattern
+				pattern: pattern,
+				subdiv: this.props.quantization
 			})
 
 			midiTune = [...midiTune, ...clip]

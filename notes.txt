@@ -1,9 +1,12 @@
 
 TODO
-- bpm selector disables qwerty notes on focus
-- add quantization selector (16th, 8th, etc.)
+
+- fix everything with the synthesizers
+- bpm apparently *does* affect quantization... #85 was recorded at 120 vs #84 at 60
+- double check that quantization selections actually do that
 - get qwerty to light up
 - grey download box when there's no download
+- bpm selector disables qwerty notes on focus
 
 
 

@@ -12,13 +12,11 @@ const ChangeQuantType = (props) => {
 
 	return (
 		<div>
-			<label>Quantize</label>
+			<label>Quantization</label>
 			<select value={props.quantization} onChange={handleChange}>
-				<option value="whole">Whole</option>
-				<option value="half">Half</option>
-				<option value="quarter">Quarter</option>
-				<option value="eighth">Eighth</option>
-				<option value="sixteenth">Sixteenth</option>
+				<option value="4n">4n</option>
+				<option value="8n">8n</option>
+				<option value="16n">16n</option>
 			</select>
 		</div>
 	)

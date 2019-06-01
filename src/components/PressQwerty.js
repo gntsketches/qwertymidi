@@ -29,12 +29,16 @@ const PressQwerty = (props) => {
 		// a: note how window object has null for onkeydown. also note error - "useEffect has missing dependency onkey"
 		// b: this causes onkeyup's first console.log to have an undefined startTime value, and so the state tune noteObjects don't get startTime!
 	onkeydown = (e) => {
-		console.log(e.key)
-		if (noteKeys_All.includes(e.key) && !down.some((obj) => obj.key === e.key) ) {
+		if (noteKeys_All.includes(e.key) && !downKeys.some((key) => key === e.key) ) {
+			// console.log(e.key)
 			setDown([...down, { key: e.key, startTime: Tone.Transport.getSecondsAtTime() } ])
+			console.log(down)
+
+				// use a function in setDown? https://www.reddit.com/r/reactjs/comments/buxhug/rerendering_arrays_as_props/
 			setDownKeys([...downKeys, e.key])
 			// console.log(downKeys)
 			currentNote = keyToPitch[e.key]
+			console.log(currentNote)
 			synth.triggerAttack(currentNote, Tone.context.currentTime)
 		}
 	}
@@ -47,9 +51,10 @@ const PressQwerty = (props) => {
 		}
 	}
 
-	// console.log happens TWICE, even thought the note is only added once...
+	// console.log happens TWICE, even though the note is only added once...
 	onkeyup = (e) => {
 		if (noteKeys_All.includes(e.key)) {  // && down etc...?
+			console.log(down)
 			let keyObject = {...down.find((obj) => obj.key === e.key)}
 			let noteObject = { note: keyToPitch[e.key], startTime: keyObject.startTime }
 			noteObject.endTime = Tone.Transport.getSecondsAtTime()

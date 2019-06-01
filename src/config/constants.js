@@ -1,9 +1,7 @@
 
 export const quantizations = {
-	'sixteenth': 0.25,
-	'eighth': 0.5,
-	'quarter': 1,
-	'half': 2,
-	'whole': 1
+	'16n': 0.25,
+	'8n': 0.5,
+	'4n': 1,
 }
 
