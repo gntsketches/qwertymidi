@@ -76,11 +76,14 @@ class App extends React.Component {
 			const quantizedNote = { note: noteObj.note}
 			quantizedNote.startBeat = Math.round(noteObj.startTime / quantizationConverter)
 			quantizedNote.endBeat = Math.round(noteObj.endTime / quantizationConverter)
+			if (quantizedNote.endBeat === quantizedNote.startBeat) {
+				quantizedNote.endBeat++
+			}
 			quantizedTune.push(quantizedNote)
 		})
 		console.log("quantizedTune", quantizedTune)
 
-		// perhaps a function to convert end beats to be at least one beat later...
+		//  converted end beats to be at least one beat later...
 
 		const buildScribblePattern = (played, count) => {
 			let pattern = ''

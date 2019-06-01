@@ -23,61 +23,21 @@ how much functionality do i want here?
     - disable qwerty sounds in
 
 
->>> 60 BPM, starting after four beat intro:
-    from #86... note that when the notes are stacatto,
-        the midi score in MuseScore is messed up...
-        even thought the "start beats" are all in the right places.
-        I think this is due to the start & end beats being the same beat
-        (check out the stacatto markings in MuseScore...?)
-        perhaps a function to convert end beats to be at least one beat later...
-
-
-0: {note: "D2", startTime: 4.069333333333334, endTime: 4.36}
-1: {note: "E2", startTime: 8.050666666666666, endTime: 8.24}
-2: {note: "E2", startTime: 10.12, endTime: 10.269333333333334}
-3: {note: "F2", startTime: 12.061333333333334, endTime: 12.189333333333334}
-4: {note: "F2", startTime: 13.08, endTime: 13.181333333333333}
-5: {note: "F2", startTime: 14.090666666666667, endTime: 14.229333333333333}
-6: {note: "F2", startTime: 15.12, endTime: 15.250666666666667}
-7: {note: "G2", startTime: 16.090666666666667, endTime: 16.250666666666667}
-8: {note: "G2", startTime: 16.581333333333333, endTime: 16.690666666666665}
-9: {note: "G2", startTime: 17.109333333333332, endTime: 17.261333333333333}
-10: {note: "G2", startTime: 17.6, endTime: 17.749333333333333}
-11: {note: "G2", startTime: 18.149333333333335, endTime: 18.28}
-12: {note: "G2", startTime: 18.610666666666667, endTime: 18.770666666666667}
-13: {note: "G2", startTime: 19.109333333333332, endTime: 19.290666666666667}
-14: {note: "G2", startTime: 19.5813333333333
-
-0: {note: "D2", startBeat: 8, endBeat: 9}
-1: {note: "E2", startBeat: 16, endBeat: 16}
-2: {note: "E2", startBeat: 20, endBeat: 21}
-3: {note: "F2", startBeat: 24, endBeat: 24}
-4: {note: "F2", startBeat: 26, endBeat: 26}
-5: {note: "F2", startBeat: 28, endBeat: 28}
-6: {note: "F2", startBeat: 30, endBeat: 31}
-7: {note: "G2", startBeat: 32, endBeat: 33}
-8: {note: "G2", startBeat: 33, endBeat: 33}
-9: {note: "G2", startBeat: 34, endBeat: 35}
-10: {note: "G2", startBeat: 35, endBeat: 35}
-11: {note: "G2", startBeat: 36, endBeat: 37}
-12: {note: "G2", startBeat: 37, endBeat: 38}
-13: {note: "G2", startBeat: 38, endBeat: 39}
-14: {note: "G2", startBeat: 39, endBeat: 39}
+        (check out the stacatto quarter notes in MuseScore...?)
+            this seems to be on MuseScore's end. the "length" of all notes is 64.
 
 
 
-0: {note: "D2", startBeat: 8, endBeat: 16}
-1: {note: "E2", startBeat: 16, endBeat: 20}
-2: {note: "E2", startBeat: 20, endBeat: 23}
-3: {note: "F2", startBeat: 24, endBeat: 26}
-4: {note: "F2", startBeat: 26, endBeat: 28}
-5: {note: "F2", startBeat: 28, endBeat: 30}
-6: {note: "F2", startBeat: 30, endBeat: 31}
-7: {note: "G2", startBeat: 32, endBeat: 33}
-8: {note: "G2", startBeat: 33, endBeat: 34}
-9: {note: "G2", startBeat: 34, endBeat: 35}
-10: {note: "G2", startBeat: 35, endBeat: 36}
-11: {note: "G2", startBeat: 36, endBeat: 37}
-12: {note: "G2", startBeat: 37, endBeat: 38}
-13: {note: "G2", startBeat: 38, endBeat: 39}
-14: {note: "G2", startBeat: 39, endBeat: 40}
+******************************************************
+cloned robtaussig fork, worked but once while playing got:
+
+TypeError: Cannot read property 'startTime' of undefined
+handleKeyUp
+C:/Users/Gregory Tippett/Documents/Coding/javascript/qwertymidi/qwertymidi/src/components/PressQwerty.js:39
+  36 | const handleKeyUp = e => {
+  37 | 	if (NOTE_KEYS_ALL.includes(e.key)) {  // && down etc...?
+  38 | 		let keyObject = down.find((obj) => obj.key === e.key)
+> 39 | 		let noteObject = { note: KEYS_TO_PITCH[e.key], startTime: keyObject.startTime }
+     | ^  40 | 		noteObject.endTime = window.Tone.Transport.getSecondsAtTime()
+  41 | 		setDown(prev => prev.filter(obj => obj.key !== e.key))
+  42 | 		setDownKeys(prev => prev.filter(key => key !== e.key))
