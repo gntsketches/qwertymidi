@@ -23,12 +23,23 @@ how much functionality do i want here?
     - disable qwerty sounds in
 
 
-        (check out the stacatto quarter notes in MuseScore...?)
-            this seems to be on MuseScore's end. the "length" of all notes is 64.
+
+https://github.com/robtaussig/qwertymidi/commit/f21442578743f3e9878169efc40684160cb80d6d#comments
+Robtaussig Questions:
+    - choice to accessed windows.tone directly from the useEffect closure
+        "window.Tone is mutable" - does reference actually change? Would I get a previous 'version"?
+        this is not "querying the DOM" so I don't have to worry about performance
+        (Maybe will skip this to try out with a merge conflict later on...?)
+
+    - Yeah! Destructuring "helps you keep track of props that you no longer use in a component as it evolves (depending on your IDE support)"
+    - useRef yes!
+
+    - setDown function approach
+    - (i think so): "It's possible redux has added a new syntax, or support for one, and you no longer need to do this. But this is what I learned way back, and if you don't dispatch an action, it will never hit your reducer.
+    - not destructuring? using the same object?  let keyObject = {...down.find((obj) => obj.key === e.key)}
 
 
-
-******************************************************
+**********************************************************
 cloned robtaussig fork, worked but once while playing got:
 
 TypeError: Cannot read property 'startTime' of undefined
