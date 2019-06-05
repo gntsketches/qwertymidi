@@ -14,7 +14,7 @@ class Header extends React.Component {
 				<StartStop toggleRecording={this.props.toggleRecording} />
 				<ChangeBpm />
 				<ChangeQuantType />
-				<div onClick={this.props.downloadMidi}><p>Download</p></div>
+				<div className="header-click" onClick={this.props.downloadMidi}><p>Download</p></div>
 			</div>
 		)
 	}

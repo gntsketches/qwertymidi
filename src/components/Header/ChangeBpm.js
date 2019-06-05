@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from "react-redux"
 
-import {setBpm} from "../actions"
+import {setBpm} from "../../actions/index"
 
 const Tone = window.Tone
 

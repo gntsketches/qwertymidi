@@ -6,7 +6,7 @@ import { toggleRecording } from "../actions"
 import PressQwerty from './PressQwerty'
 import { quantizations } from '../config/constants'
 
-import Header from './Header'
+import Header from './Header/Header'
 
 import './App.css';
 
@@ -83,7 +83,6 @@ class App extends React.Component {
 		})
 		console.log("quantizedTune", quantizedTune)
 
-		//  converted end beats to be at least one beat later...
 
 		const buildScribblePattern = (played, count) => {
 			let pattern = ''

@@ -11,7 +11,7 @@ const StartStop = (props) => {
 	}
 
 	return (
-		<div onClick={props.toggleRecording} >{renderStartStop()}</div>
+		<div className="header-click" onClick={props.toggleRecording} >{renderStartStop()}</div>
 	)
 }
 
