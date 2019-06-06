@@ -1,21 +1,21 @@
 import React from 'react'
 
-import StartStop from './StartStop'
-import ChangeBpm from './ChangeBpm'
-import ChangeQuantType from './ChangeQuantization'
-
-import './header.scss'
+import { Wrapper } from './Header.styles'
+import StartStop from './HeaderThings/StartStop'
+import ChangeBpm from './HeaderThings/ChangeBpm'
+import ChangeQuantType from './HeaderThings/ChangeQuantization'
+import Download from './HeaderThings/Download'
 
 class Header extends React.Component {
 
 	render() {
 		return (
-			<div className="header">
+			<Wrapper>
 				<StartStop toggleRecording={this.props.toggleRecording} />
 				<ChangeBpm />
 				<ChangeQuantType />
-				<div className="header-click" onClick={this.props.downloadMidi}><p>Download</p></div>
-			</div>
+				<Download onClick={this.props.downloadMidi} />
+			</Wrapper>
 		)
 	}
 }

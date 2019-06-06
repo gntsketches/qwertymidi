@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import { setQuantization } from '../../actions'
+import { setQuantization } from '../../../actions'
 
 const ChangeQuantType = (props) => {
 

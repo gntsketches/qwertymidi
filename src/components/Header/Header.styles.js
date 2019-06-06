@@ -1,4 +1,6 @@
-.header {
+import styled from 'styled-components'
+
+export const Wrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin: 20px 0 40px 0;
@@ -29,11 +31,11 @@
     .header-click {
       cursor: pointer;
     }
-
-
-
+    
   }
-
-}
-
-
+  
+	.greyed {
+		color: grey;
+	}
+  
+`

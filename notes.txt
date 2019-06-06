@@ -1,24 +1,26 @@
 
 TODO
-- refactor CSS
-- grey download box when there's no download
+- refactor CSS - index, app, qwerty...
 - disable qwerty sounds when input focused
-- warn before overwrite
-    - toggle overwrite warning
 - modal with info
     - toggle modal
+
 > Write Walmik: write midi time signatures and bpm
 
 - does not handle syncopations very well... er... at all...
     hmmm...
     - *does* bpm affect quantization?... #85 was recorded at 120 vs #84 at 60
 
+- append to tune option?
+- ducks pattern?
 - sometimes the metronome beat just stops...
 - shortcut for record start/stop
 - woodblock sound for metronome
 - switch sounds (more metronome sounds too)
+- toggle overwrite warning
 - change note octaves
 - polyphonic!
+
 
 structure:
     - maybe pressQwerty logic should be a container for Qwerty?

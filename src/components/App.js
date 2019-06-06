@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { toggleRecording } from "../actions"
+import { toggleRecording, resetTune } from "../actions"
 
 import PressQwerty from './PressQwerty'
 import { quantizations } from '../config/constants'
@@ -40,11 +40,19 @@ class App extends React.Component {
 		Tone.Transport.bpm.value = this.props.bpm
 	}
 
+	overwriteWarning() {
+		return window.confirm('Restarting will overwrite previous recording. Proceed?')
+	}
+
 	toggleRecording = () => {
 		if (this.props.isRecording) {
 			this.props.toggleRecording(false)
 			Tone.Transport.stop()
 		} else {
+			if (this.props.tune.length > 0) {
+				if (this.overwriteWarning() === false) { return }
+			}
+			this.props.resetTune()
 			this.props.toggleRecording(true)
 			Tone.Transport.start()
 		}
@@ -153,7 +161,7 @@ const mapStateToProps = (state) => {
 
 export default connect(
 	mapStateToProps,
-	{ toggleRecording }
+	{ toggleRecording, resetTune }
 )(App);
 
 

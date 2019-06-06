@@ -6,6 +6,12 @@ export const addNoteToTune = (note) => {
 	}
 }
 
+export const resetTune = () => {
+	return {
+		type: 'RESET_TUNE'
+	}
+}
+
 export const toggleRecording = (bool) => {
 	return {
 		type: 'TOGGLE_RECORDING',
