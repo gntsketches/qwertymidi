@@ -33,11 +33,10 @@ const PressQwerty = ({ qwertySoundEnabled, isRecording, addNoteToTune }) => {
 			}
 		}
 
-		// (todo: check does console.log still happens TWICE?) , even though the note is only added once...
 		const handleKeyUp = (e) => {
 			if (qwertySoundEnabled === true && NOTE_KEYS_ALL.includes(e.key)) {  // && down etc...?
 				// let keyObject = {...down.find((obj) => obj.key === e.key)}
-				let keyObject = down.find((obj) => obj.key === e.key) // robtaussig does not use spread
+				let keyObject = down.find((obj) => obj.key === e.key)
 				let noteObject = { note: KEYS_TO_PITCH[e.key], startTime: keyObject.startTime }
 				noteObject.endTime = window.Tone.Transport.getSecondsAtTime()
 				// setDown(down.filter(obj => obj.key !== e.key))
@@ -47,6 +46,7 @@ const PressQwerty = ({ qwertySoundEnabled, isRecording, addNoteToTune }) => {
 				if (currentNote.current === KEYS_TO_PITCH[e.key]) {
 					synth.triggerRelease(null)	//KEYS_TO_PITCH[e.key]) // someday, polyphonic
 				}
+				if (noteObject.note === undefined) { return } // this seems hacky. you shouldn't even try to make the object with the non-pitches. You'll want a KEYS_ALL distinct...
 				addNote(noteObject)
 			}
 		}

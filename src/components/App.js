@@ -20,7 +20,7 @@ const metronome = new Tone.MembraneSynth({
 // const player = new Tone.Player({
 // 	'url': './public/resources/sounds/woodblock.mp3'
 // }).toMaster()
-// const player = new Tone.Player('../../public/resources/sounds/woodblock.mp3').toMaster()
+const player = new Tone.Player('public/woodblock.mp3').toMaster()
 // const player = new Tone.Player('./woodblock.mp3').toMaster()
 // console.log(player)
 
@@ -82,7 +82,7 @@ class App extends React.Component {
 		const quantizationConversion = quantizations[this.props.quantization]
 		console.log('quantizationConversion', quantizationConversion)
 		const bpmConversion = this.props.bpm/60
-		let quantizedTune = []
+		let quantizedTuneBase = []
 		tune.forEach((noteObj, index) => {
 			const quantizedNote = { note: noteObj.note}
 			quantizedNote.startBeat = Math.round(noteObj.startTime * bpmConversion * quantizationConversion)
@@ -90,9 +90,9 @@ class App extends React.Component {
 			if (quantizedNote.endBeat === quantizedNote.startBeat) {
 				quantizedNote.endBeat++
 			}
-			quantizedTune.push(quantizedNote)
+			quantizedTuneBase.push(quantizedNote)
 		})
-		console.log("quantizedTune", quantizedTune)
+		console.log("quantizedTuneBase", quantizedTuneBase)
 
 
 		const buildScribblePattern = (played, count) => {
@@ -112,19 +112,22 @@ class App extends React.Component {
 
 
 		// check if any notes have a duplicated start beat and push ahead/trim them if so.
-		let quantizedTuneTrimmed = []
-		quantizedTune.forEach((noteObj, i, arr) => {
-			if (i < 0 && noteObj.startBeat === arr[i-1].startBeat) {
-				// const noteOnNextBeat = arr.find( el => el.startBeat >= noteObj.endBeat
-				// if (noteOnNextBeat.startBeat ... hmmm... > arr[i-1].endBeat) {
-			//		quantizedTune.push({pitch: noteObj.pitch, startBeat: noteObj.startBeat+1, endBeat: noteObj.startBeat+2 })
-				// endBeat just +1 ? might be confusing if it was the (attempted) last note of a phrase
+		let quantizedTune = []
+		quantizedTuneBase.forEach((noteObj, i, arr) => {
+			if (i > 0 && noteObj.startBeat === arr[i-1].startBeat) {
+				const noteOnNextBeat = arr.find( el => el.startBeat >= noteObj.endBeat)
+				console.log(i, noteObj.startBeat, noteOnNextBeat)
+				if (noteOnNextBeat && noteOnNextBeat.startBeat > arr[i-1].endBeat) {
+					quantizedTune.push({note: noteObj.note, startBeat: noteObj.startBeat + 1, endBeat: noteObj.startBeat + 2})
+				}
+				// pushed note just one beat ? might be confusing if it was the (attempted) last note of a phrase
 				// you could check if it's the last note with that startBeat, and if so allow the duration to be as long as specified without overrunning the next note.
 			} else {
-				quantizedTuneTrimmed.push(noteObj) // the same object...(?)
+				quantizedTune.push(noteObj) // the same object...(?)
 			}
 		})
 
+		console.log('quantizedTune', quantizedTune)
 
 		let midiTune = []
 		quantizedTune.forEach((noteObj, index) => {

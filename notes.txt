@@ -1,31 +1,32 @@
 
 TODO
-- MIDI refactor
-    - test what happens
-
-- install woodblock
-- blur inputs on enter
-- refactor CSS - index, app, qwerty...
-- disable qwerty sounds when input focused
-- modal with info
-    - toggle modal
-
-> Write Walmik: write midi time signatures and bpm
 
 
+> Write Walmik: write midi time signatures, bpm, polyphonic
 
 
-- append to tune option?
-- ducks pattern?
+- change volume of metronome & qwerty
 - polyphonic!
 
-- sometimes the metronome beat just stops...
-- shortcut for record start/stop
-- switch sounds (more metronome sounds too)
-- toggle overwrite warning
-- change note octaves
+Refactor:
+- refactor CSS - index, app, qwerty...
+- ducks pattern?
 
+Bugs:
+- sometimes the metronome beat just stops...
+
+Maybe...
+- append to tune option
+- switch sounds (more metronome sounds too)
+- more metronome options
+    - install woodblock
+- change note octaves
+- blur inputs on enter
+- toggle overwrite warning
 - "snap" function
+- shortcut for record start/stop
+- modal with info, toggle modal
+
 
 
 structure:
