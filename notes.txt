@@ -1,5 +1,10 @@
 
 TODO
+- MIDI refactor
+    - test what happens
+
+- install woodblock
+- blur inputs on enter
 - refactor CSS - index, app, qwerty...
 - disable qwerty sounds when input focused
 - modal with info
@@ -7,41 +12,132 @@ TODO
 
 > Write Walmik: write midi time signatures and bpm
 
-- does not handle syncopations very well... er... at all...
-    hmmm...
-    - *does* bpm affect quantization?... #85 was recorded at 120 vs #84 at 60
+
+
 
 - append to tune option?
 - ducks pattern?
+- polyphonic!
+
 - sometimes the metronome beat just stops...
 - shortcut for record start/stop
-- woodblock sound for metronome
 - switch sounds (more metronome sounds too)
 - toggle overwrite warning
 - change note octaves
-- polyphonic!
+
+- "snap" function
 
 
 structure:
     - maybe pressQwerty logic should be a container for Qwerty?
     - where to put download logic?
         - maybe in a container for Download button?
-
+    - best styling for (eg) pointer-cursor? (best choices will prob change as/if app grows)
 
 
 https://github.com/robtaussig/qwertymidi/commit/f21442578743f3e9878169efc40684160cb80d6d#comments
 
 
-**********************************************************
-cloned robtaussig fork, worked but once while playing got:
+****************************************************************************************
+music.mid - 60bpm, q 16th note
 
-TypeError: Cannot read property 'startTime' of undefined
-handleKeyUp
-C:/Users/Gregory Tippett/Documents/Coding/javascript/qwertymidi/qwertymidi/src/components/PressQwerty.js:39
-  36 | const handleKeyUp = e => {
-  37 | 	if (NOTE_KEYS_ALL.includes(e.key)) {  // && down etc...?
-  38 | 		let keyObject = down.find((obj) => obj.key === e.key)
-> 39 | 		let noteObject = { note: KEYS_TO_PITCH[e.key], startTime: keyObject.startTime }
-     | ^  40 | 		noteObject.endTime = window.Tone.Transport.getSecondsAtTime()
-  41 | 		setDown(prev => prev.filter(obj => obj.key !== e.key))
-  42 | 		setDownKeys(prev => prev.filter(key => key !== e.key))
+raw tune
+0: {note: "D2", startTime: 4.0906666666666665, endTime: 7.421333333333333}
+1: {note: "D2", startTime: 8.061333333333334, endTime: 8.669333333333332}
+2: {note: "D2", startTime: 8.810666666666666, endTime: 9.370666666666667}
+3: {note: "D2", startTime: 9.581333333333333, endTime: 9.949333333333334}
+4: {note: "D2", startTime: 10.101333333333333, endTime: 10.749333333333333}
+5: {note: "D2", startTime: 10.88, endTime: 11.429333333333334}
+6: {note: "D2", startTime: 11.610666666666667, endTime: 12}
+7: {note: "D2", startTime: 12.141333333333334, endTime: 12.741333333333333}
+8: {note: "D2", startTime: 12.901333333333334, endTime: 13.429333333333334}
+9: {note: "D2", startTime: 13.570666666666666, endTime: 13.941333333333333}
+10: {note: "D2", startTime: 14.029333333333334, endTime: 14.730666666666666}
+11: {note: "D2", startTime: 14.861333333333333, endTime: 15.461333333333334}
+12: {note: "D2", startTime: 15.589333333333334, endTime: 15.890666666666666}
+
+start times sorted
+0: {note: "D2", startTime: 4.0906666666666665, endTime: 7.421333333333333}
+1: {note: "D2", startTime: 8.061333333333334, endTime: 8.669333333333332}
+2: {note: "D2", startTime: 8.810666666666666, endTime: 9.370666666666667}
+3: {note: "D2", startTime: 9.581333333333333, endTime: 9.949333333333334}
+4: {note: "D2", startTime: 10.101333333333333, endTime: 10.749333333333333}
+5: {note: "D2", startTime: 10.88, endTime: 11.429333333333334}
+6: {note: "D2", startTime: 11.610666666666667, endTime: 12}
+7: {note: "D2", startTime: 12.141333333333334, endTime: 12.741333333333333}
+8: {note: "D2", startTime: 12.901333333333334, endTime: 13.429333333333334}
+9: {note: "D2", startTime: 13.570666666666666, endTime: 13.941333333333333}
+10: {note: "D2", startTime: 14.029333333333334, endTime: 14.730666666666666}
+11: {note: "D2", startTime: 14.861333333333333, endTime: 15.461333333333334}
+12: {note: "D2", startTime: 15.589333333333334, endTime: 15.890666666666666}
+
+quantized tune
+0: {note: "D2", startBeat: 16, endBeat: 30}
+1: {note: "D2", startBeat: 32, endBeat: 35}
+2: {note: "D2", startBeat: 35, endBeat: 37}
+3: {note: "D2", startBeat: 38, endBeat: 40}
+4: {note: "D2", startBeat: 40, endBeat: 43}
+5: {note: "D2", startBeat: 44, endBeat: 46}
+6: {note: "D2", startBeat: 46, endBeat: 48}
+7: {note: "D2", startBeat: 49, endBeat: 51}
+8: {note: "D2", startBeat: 52, endBeat: 54}
+9: {note: "D2", startBeat: 54, endBeat: 56}
+10: {note: "D2", startBeat: 56, endBeat: 59}
+11: {note: "D2", startBeat: 59, endBeat: 62}
+12: {note: "D2", startBeat: 62, endBeat: 64}
+
+midiTune
+0: {note: Array(1), length: 448, level: 127}
+1: {note: null, length: 32, level: 127}
+2: {note: null, length: 32, level: 127}
+3: {note: Array(1), length: 96, level: 127}
+4: {note: Array(1), length: 64, level: 127}
+5: {note: null, length: 32, level: 127}
+6: {note: Array(1), length: 64, level: 127}
+7: {note: Array(1), length: 96, level: 127}
+8: {note: null, length: 32, level: 127}
+9: {note: Array(1), length: 64, level: 127}
+10: {note: Array(1), length: 64, level: 127}
+11: {note: null, length: 32, level: 127}
+12: {note: Array(1), length: 64, level: 127}
+13: {note: null, length: 32, level: 127}
+14: {note: Array(1), length: 64, level: 127}
+15: {note: Array(1), length: 64, level: 127}
+16: {note: Array(1), length: 96, level: 127}
+17: {note: Array(1), length: 96, level: 127}
+18: {note: Array(1), length: 64, level: 127}
+
+
+8			-	8.06
+8.25
+8.5
+8.75	-	8.81
+9
+9.25
+9.5		-	9.58
+9.75
+10		-	10.10
+10.25
+10.5
+10.75
+11		- 10.88
+11.25
+11.5	-	11.61
+11.75
+12
+12.25	- 12.14
+12.5
+12.75
+13		- 12.90
+13.25
+13.5	-	13.57
+13.75
+14		-	14.02
+14.25
+14.5
+14.75	-	14.86
+15
+15.25
+15.5	-	15.58
+15.75
+16

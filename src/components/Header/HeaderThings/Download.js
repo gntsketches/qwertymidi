@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 
+const style = {
+	cursor: 'pointer'
+}
 
 const Download = ({ tune, onClick }) => {
 
@@ -10,7 +13,7 @@ const Download = ({ tune, onClick }) => {
 	const greyDownloadText = tune.length === 0 ? 'greyed' : ''
 
 	return (
-			<div className='header-click' onClick={onClick} >
+			<div className='header-click' onClick={onClick} style={style} >
 				<p className={greyDownloadText} >Download</p>
 			</div>
 	)

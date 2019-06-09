@@ -10,8 +10,12 @@ const StartStop = (props) => {
 		}
 	}
 
+	const style = {
+		cursor: 'pointer'
+	}
+
 	return (
-		<div className="header-click" onClick={props.toggleRecording} >{renderStartStop()}</div>
+		<div className="header-click" style={style} onClick={props.toggleRecording} >{renderStartStop()}</div>
 	)
 }
 

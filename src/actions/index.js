@@ -32,3 +32,10 @@ export const setQuantization = (quantization) => {
 		payload: quantization
 	}
 }
+
+export const enableQwertySound = (bool) => {
+	return {
+		type: 'ENABLE_QWERTY_SOUND',
+		payload: bool
+	}
+}

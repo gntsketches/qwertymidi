@@ -34,6 +34,17 @@ const setQuantization = (state='8n', action) => {
 	}
 }
 
+const enableQwertySound = (state=true, action) => {
+	console.log(action.payload)
+
+	switch(action.type) {
+		case 'ENABLE_QWERTY_SOUND':
+			return action.payload
+		default:
+			return state
+	}
+}
+
 const updateTune = (state=[], action) => {
 	switch(action.type) {
 		case 'ADD_NOTE_TO_TUNE':
@@ -61,5 +72,6 @@ export default combineReducers({
 	tune: updateTune,
 	isRecording: toggleIsRecording,
 	bpm: setBpm,
-	quantization: setQuantization
+	quantization: setQuantization,
+	qwertySoundEnabled: enableQwertySound
 })

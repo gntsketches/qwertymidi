@@ -8,7 +8,7 @@ import { NOTE_KEYS_ALL } from "../config/constants"
 import { KEYS_TO_PITCH } from "../config/constants"
 import Qwerty from './Qwerty'
 
-const PressQwerty = ({ isRecording, addNoteToTune }) => {
+const PressQwerty = ({ qwertySoundEnabled, isRecording, addNoteToTune }) => {
 
 	const [down, setDown] = useState([])
 	const [downKeys, setDownKeys] = useState([])
@@ -24,7 +24,7 @@ const PressQwerty = ({ isRecording, addNoteToTune }) => {
 		}
 
 		const handleKeyDown = (e) => {
-			if (NOTE_KEYS_ALL.includes(e.key) && !down.some((obj) => obj.key === e.key) ) {
+			if (qwertySoundEnabled === true && NOTE_KEYS_ALL.includes(e.key) && !down.some((obj) => obj.key === e.key) ) {
 				setDown(prev => prev.concat({ key: e.key, startTime: window.Tone.Transport.getSecondsAtTime() }))
 				// setDownKeys([...downKeys, e.key]) // following refactor, results in multiple keys "stuck" in setDownKeys
 				setDownKeys(prev => prev.concat(e.key))
@@ -35,7 +35,7 @@ const PressQwerty = ({ isRecording, addNoteToTune }) => {
 
 		// (todo: check does console.log still happens TWICE?) , even though the note is only added once...
 		const handleKeyUp = (e) => {
-			if (NOTE_KEYS_ALL.includes(e.key)) {  // && down etc...?
+			if (qwertySoundEnabled === true && NOTE_KEYS_ALL.includes(e.key)) {  // && down etc...?
 				// let keyObject = {...down.find((obj) => obj.key === e.key)}
 				let keyObject = down.find((obj) => obj.key === e.key) // robtaussig does not use spread
 				let noteObject = { note: KEYS_TO_PITCH[e.key], startTime: keyObject.startTime }
@@ -59,7 +59,7 @@ const PressQwerty = ({ isRecording, addNoteToTune }) => {
 			window.removeEventListener('keyup', handleKeyUp)
 		}
 
-	}, [down, isRecording, addNoteToTune])
+	}, [down, isRecording, addNoteToTune, qwertySoundEnabled])
 
 
 	return (
@@ -72,7 +72,8 @@ const PressQwerty = ({ isRecording, addNoteToTune }) => {
 
 const mapStateToProps = (state) => {
 	return {
-		isRecording: state.isRecording
+		isRecording: state.isRecording,
+		qwertySoundEnabled: state.qwertySoundEnabled
 	}
 }
 

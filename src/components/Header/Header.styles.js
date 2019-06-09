@@ -36,6 +36,7 @@ export const Wrapper = styled.div`
   
 	.greyed {
 		color: grey;
+		cursor: default
 	}
   
 `
